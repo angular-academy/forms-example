@@ -1,0 +1,36 @@
+@import './styles/bag-colors';
+$bg1: $bag-blue;
+$bg2: lighten($bag-blue, 15);
+$bg3: lighten($bag-blue, 30);
+$bg4: lighten($bag-blue, 45);
+$header-height: 50px;
+$nav-height: 50px;
+$footer-height: 50px;
+$main-height-sub: $header-height+$nav-height+$footer-height;
+:host {
+    display: block;
+    header {
+        display: block;
+        padding: 1em;
+        background-color: $bg1;
+        height: $header-height;
+    }
+    nav {
+        display: block;
+        padding: 1em;
+        background-color: $bg2;
+        height: $nav-height;
+    }
+    footer {
+        display: block;
+        padding: 1em;
+        background-color: $bg3;
+        height: $footer-height;
+    }
+    main {
+        display: block;
+        padding: 1em;
+        background-color: $bg4;
+        height: calc(100vh - #{$main-height-sub})
+    }
+}

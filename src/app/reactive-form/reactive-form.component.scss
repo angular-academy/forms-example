@@ -1,0 +1,20 @@
+:host {
+    label {
+        display: block;
+        margin-bottom: 1em;
+        input,
+        select {
+            display: block;
+        }
+    }
+    button[type=submit] {
+        cursor: pointer;
+        background-color: greenyellow;
+        color: black;
+    }
+    button[type=submit][disabled] {
+        cursor: not-allowed;
+        background-color: orangered;
+        color: white;
+    }
+}
