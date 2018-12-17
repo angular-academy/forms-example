@@ -95,5 +95,32 @@ this.userForm = new FormGroup({
 ## Validatoren
 
 
+### Template Driven Forms
+
+angular unterstützt die Auswertung von Eingaben bei Form-Elementen nach den [HTML Form Validator Attributen](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation) .
+
+Wir können diesen Zustand pro Element abfragen, indem wir den Status des NgModel eines Formularelements abfragen, um zum Beispiel gezielt Hilfe zu leisten:
+
+<label>User Name
+    <input type="text" name="inputName" [(ngModel)]="user.name" #userName="ngModel" minlength="6">
+    <p *ngIf="userName.invalid && !userName.pristine">Name muss min. 6 Buchstaben lang sein<p>
+</label>
+
+Die Liste der möglichen Validator-Flags findet ihr in der [NgModel Dokumentation](https://angular.io/api/forms/NgModel)
+
+### Reactive Forms
+
+In Reactive Forms setzen wir Validatoren auf das FormControl eines Elements. Hierzu bietet angular eine Reihe [eingebauter Validator](https://angular.io/api/forms/Validators)
+
+```typescript
+this.userForm = new FormGroup({
+      name: new FormControl('', [Validators.minLength(6)]),
+      // ...
+});
+```
+
+Fehler sind über die *errors* Property einer FormGroup oder FormControl abfragbar. Hierbei gilt folgendes:
+* Fehler individueller FormControl Elemente sind an der jeweiligen *error* Property abzufragen, z.B. über this.userForm.controls.name.error
+* Fehler für (Teil)Formulare müssen über eine eigene Validator-Funktion bei der entsprechenden FormGroup registriert werden.
 
 ## Custom Form Elements

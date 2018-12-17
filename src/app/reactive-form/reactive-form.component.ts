@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserModel } from '../model/user';
 import { Subscription } from 'rxjs';
 
@@ -58,7 +58,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
 
   initFormGroup() {
     this.userForm = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('', [Validators.minLength(6)]),
       gender: new FormControl('male'),
       favoriteDrink: new FormControl('')
     });
@@ -72,6 +72,8 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
     this.userFormChangeSubscription = this.userForm.valueChanges.subscribe(
       (newUser: UserModel) => {
         console.log('new user model', {...newUser });
+        console.log(this.userForm.errors);
+        console.log(this.userForm.controls.name.errors);
         this.user = newUser;
       }
     );
